@@ -4,7 +4,7 @@ const foodSound = new Audio('Sound/food.mp3');
 const gameOverSound = new Audio('Sound/gameover.mp3');
 const moveSound = new Audio('Sound/move.mp3');
 const musicSound = new Audio('Sound/music.mp3');
-let speed = 19;
+let speed = 10;
 let score = 0;
 let lastPaintTime = 0;
 let snakeArr = [
@@ -32,7 +32,7 @@ function isCollide(snake) {
         }
     }
     // If you bump into the wall
-    if(snake[0].x >= 18 || snake[0].x <=0 || snake[0].y >= 18 || snake[0].y <=0){
+    if(snake[0].x >= 24 || snake[0].x <=0 || snake[0].y >= 24 || snake[0].y <=0){
         return true;
     }
         
@@ -60,12 +60,12 @@ function gameEngine(){
         if(score>hiscoreval){
             hiscoreval = score;
             localStorage.setItem("hiscore", JSON.stringify(hiscoreval));
-            hiscoreBox.innerHTML = "HiScore: " + hiscoreval;
+            hiscoreBox.innerHTML = "HighScore: " + hiscoreval;
         }
         scoreBox.innerHTML = "Score: " + score;
         snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
         let a = 2;
-        let b = 16;
+        let b = 23;
         food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
     }
 
@@ -113,7 +113,7 @@ if(hiscore === null){
 }
 else{
     hiscoreval = JSON.parse(hiscore);
-    hiscoreBox.innerHTML = "HiScore: " + hiscore;
+    hiscoreBox.innerHTML = "HighScore: " + hiscore;
 }
 
 window.requestAnimationFrame(main);
@@ -140,6 +140,26 @@ window.addEventListener('keydown', e =>{
             break;
 
         case "ArrowRight":
+            console.log("ArrowRight");
+            inputDir.x = 1;
+            inputDir.y = 0;
+            break;
+        case "w":
+            console.log("ArrowUp");
+            inputDir.x = 0;
+            inputDir.y = -1;
+            break;
+        case "s":
+            console.log("ArrowDown");
+            inputDir.x = 0;
+            inputDir.y = 1;
+            break;
+        case "a":
+            console.log("ArrowLeft");
+            inputDir.x = -1;
+            inputDir.y = 0;
+            break;
+        case "d":
             console.log("ArrowRight");
             inputDir.x = 1;
             inputDir.y = 0;
