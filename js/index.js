@@ -66,7 +66,12 @@ function gameEngine(){
         snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
         let a = 2;
         let b = 23;
-        food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
+        
+        do {
+            food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
+            // Check if the generated food position is on the snake
+            isOnSnake = snakeArr.some(segment => segment.x === food.x && segment.y === food.y);
+          } while (isOnSnake);
     }
 
     // Moving the snake
